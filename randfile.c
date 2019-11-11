@@ -17,13 +17,13 @@ int main() {
     int arr[10];
     printf("Generating random numbers:\n");
     int idx;
-    for(idx = 0; idx < 10, idx++) {
+    for(idx = 0; idx < 10; idx++) {
         arr[idx] = randNum();
         printf("\trandom %d: %d\n", idx, arr[idx]);
     }
 
     printf("\nWriting numbers to file...\n\n");
-    int fd = open("rand", O_CREAT | ORDWR, 0744); //Set permissions for user to rwx but for group and others to just r
+    int fd = open("rand", O_CREAT | O_RDWR, 0744); //Set permissions for user to rwx but for group and others to just r
     if (fd == -1) {
         printf("Error %s\n", strerror(errno));
     }
@@ -41,7 +41,7 @@ int main() {
     }
     int err = read(file, arr2, 40);
     if (err == -1) {
-        printf("Error %s\n". strerror(errno));
+        printf("Error %s\n", strerror(errno));
     }
     close(file);
 
